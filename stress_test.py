@@ -11,7 +11,7 @@ import os
 import random
 import string
 import json
-
+from time import sleep
 from concurrent.futures import ThreadPoolExecutor
 
 def generate_random_username():
@@ -41,40 +41,90 @@ def run_test(url, num_iterations):
             driver.get(url)
             page_end_time = time.time()
             iteration_data['page_load_time'] = page_end_time - page_start_time
-
+#click login link in header
             login_click_start_time = time.time()
             login_button = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "Login")))
             login_button.click()
             login_click_end_time = time.time()
             iteration_data['login_click_time'] = login_click_end_time - login_click_start_time
-
+#click create account button 
             create_account_click_start_time = time.time()
             create_account_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Create new account')]")))
             create_account_button.click()
             create_account_click_end_time = time.time()
             iteration_data['create_account_click_time'] = create_account_click_end_time - create_account_click_start_time
-
+#generate random login credentials
             username = generate_random_username()
             email = generate_random_email()
             password = generate_random_password()
-
+#fill out form for account creation
             form_fill_start_time = time.time()
             username_field = wait.until(EC.presence_of_element_located((By.ID, "uname")))
             email_field = driver.find_element(By.ID, "email")
             password_field = driver.find_element(By.ID, "password")
-
             username_field.send_keys(username)
             email_field.send_keys(email)
             password_field.send_keys(password)
             form_fill_end_time = time.time()
             iteration_data['form_fill_time'] = form_fill_end_time - form_fill_start_time
-
+#press create account
             create_account_submit_start_time = time.time()
             create_account_submit = driver.find_element(By.XPATH, "//button[contains(text(), 'Create Account')]")
             create_account_submit.click()
             create_account_submit_end_time = time.time()
             iteration_data['create_account_submit_time'] = create_account_submit_end_time - create_account_submit_start_time
-
+#handle alert
+            alert_wait_start_time = time.time()
+            try:
+                WebDriverWait(driver, 10).until(EC.alert_is_present())
+                alert = driver.switch_to.alert
+                alert_text = alert.text
+                print(f"Alert present with text: {alert_text}")
+                alert.accept()
+                print("Alert accepted")
+            except TimeoutException:
+                print("No alert present")
+            alert_wait_end_time = time.time()
+            iteration_data['alert_wait_time'] = alert_wait_end_time - alert_wait_start_time
+#navigate to login 
+            login_click_start_time_1 = time.time()
+            login_button = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "Login")))
+            login_button.click()
+            login_click_end_time_1 = time.time()
+            iteration_data['login_click_time_1'] = login_click_end_time_1 - login_click_start_time_1
+#filling out login form
+            form_fill_start_time_1 = time.time()
+            username_field = wait.until(EC.presence_of_element_located((By.ID, "uname")))
+            password_field = driver.find_element(By.ID, "password")
+            username_field.send_keys(username)
+            password_field.send_keys(password)
+            form_fill_end_time_1 = time.time()
+            iteration_data['form_fill_time_1'] = form_fill_end_time_1 - form_fill_start_time_1
+#login button press
+            login_form_button_click_start_time = time.time()
+            login_form_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Login')]")))
+            login_form_button.click()
+            login_form_button_click_end_time = time.time()
+            iteration_data['login_form_button_click_time'] = login_form_button_click_end_time - login_form_button_click_start_time
+#click quotes link
+            quote_click_start_time = time.time()
+            quote_button = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "Quotes")))
+            quote_button.click()
+            quote_click_end_time = time.time()
+            iteration_data['quote_click_time'] = quote_click_end_time - quote_click_start_time
+#click buy by href 
+            buy_button_click_start_time = time.time()
+            buy_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/Trade/buy/A']")))
+            driver.execute_script("arguments[0].click();", buy_button)
+            buy_button_click_end_time = time.time()
+            iteration_data['buy_button_click_time'] = buy_button_click_end_time - buy_button_click_start_time
+#click place order 
+            place_button_click_start_time = time.time()
+            place_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Place Order')]")))
+            place_button.click()
+            place_button_click_end_time = time.time()
+            iteration_data['place_button_click_time'] = place_button_click_end_time - place_button_click_start_time
+#handle alert
             alert_wait_start_time = time.time()
             try:
                 WebDriverWait(driver, 10).until(EC.alert_is_present())
@@ -88,6 +138,57 @@ def run_test(url, num_iterations):
             alert_wait_end_time = time.time()
             iteration_data['alert_wait_time'] = alert_wait_end_time - alert_wait_start_time
 
+#click quotes link
+            quote_click_start_time_1 = time.time()
+            quote_button = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "Quotes")))
+            quote_button.click()
+            quote_click_end_time_1 = time.time()
+            iteration_data['quote_click_time_1'] = quote_click_end_time_1 - quote_click_start_time_1
+#click sell by href using js 
+            sell_button_click_start_time = time.time()
+            sell_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/Trade/sell/A']")))
+            driver.execute_script("arguments[0].click();", sell_button)
+            sell_button_click_end_time = time.time()
+            iteration_data['sell_button_click_time'] = sell_button_click_end_time - sell_button_click_start_time
+#click place order 
+            place_button_click_start_time_1 = time.time()
+            place_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Place Order')]")))
+            place_button.click()
+            place_button_click_end_time_1 = time.time()
+            iteration_data['place_button_click_time_1'] = place_button_click_end_time_1 - place_button_click_start_time_1
+#handle alert
+            alert_wait_start_time = time.time()
+            try:
+                WebDriverWait(driver, 10).until(EC.alert_is_present())
+                alert = driver.switch_to.alert
+                alert_text = alert.text
+                print(f"Alert present with text: {alert_text}")
+                alert.accept()
+                print("Alert accepted")
+            except TimeoutException:
+                print("No alert present")
+            alert_wait_end_time = time.time()
+            iteration_data['alert_wait_time'] = alert_wait_end_time - alert_wait_start_time
+#click logout
+            logout_click_start_time = time.time()
+            logout_button = wait.until(EC.element_to_be_clickable((By.LINK_TEXT, "Logout ("+ str(username) +")")))
+            driver.execute_script("arguments[0].click();", logout_button)
+            logout_click_end_time = time.time()
+            iteration_data['portfolio_click_time'] = logout_click_end_time - logout_click_start_time
+#handle alert
+            alert_wait_start_time = time.time()
+            try:
+                WebDriverWait(driver, 10).until(EC.alert_is_present())
+                alert = driver.switch_to.alert
+                alert_text = alert.text
+                print(f"Alert present with text: {alert_text}")
+                alert.accept()
+                print("Alert accepted")
+            except TimeoutException:
+                print("No alert present")
+            alert_wait_end_time = time.time()
+            iteration_data['alert_wait_time'] = alert_wait_end_time - alert_wait_start_time
+#done
         except (TimeoutException, NoSuchElementException, UnexpectedAlertPresentException) as e:
             print(f"Error during test execution: {str(e)}")
             iteration_data['error'] = str(e)
@@ -135,8 +236,8 @@ def calculate_metrics(results):
 
 def main():
     url = os.environ.get('TEST_URL', 'https://c397team05dev.computerlab.online')
-    num_users = int(os.environ.get('NUM_USERS', '20'))
-    num_iterations = int(os.environ.get('NUM_ITERATIONS', '5'))
+    num_users = int(os.environ.get('NUM_USERS', '100'))
+    num_iterations = int(os.environ.get('NUM_ITERATIONS', '3'))
 
     print(f"Starting stress test with {num_users} concurrent users, {num_iterations} iterations each")
     
