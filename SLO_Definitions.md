@@ -79,14 +79,7 @@ This document defines the Service Level Objectives (SLOs) for the `c397-team05-p
 - **Target Percentage**: 90% of the codebase should be covered by tests.
 - **Evaluation Period**: Per quarter.
 
-## 12. User Experience Metrics
-
-- **Metric**: Time to first interaction on the website.
-- **Threshold**: 95% of users should be able to interact with the page within 1 second.
-- **Target Percentage**: 95%
-- **Evaluation Period**: Per week.
-
-## 13. Scalability Threshold
+## 12. Scalability Threshold
 
 - **Metric**: Number of users the system can support before experiencing degraded service.
 - **Threshold**: System should support up to 1000 concurrent users without performance degradation.
