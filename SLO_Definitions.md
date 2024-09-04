@@ -44,42 +44,35 @@ This document defines the Service Level Objectives (SLOs) for the `c397-team05-p
 - **Target Percentage**: 95%
 - **Evaluation Period**: Per month.
 
-## 7. Error Rate
-
-- **Metric**: Percentage of failed HTTP requests.
-- **Threshold**: Error rate should not exceed 0.1%.
-- **Target Percentage**: 99.9% of requests should be successful.
-- **Evaluation Period**: Per month.
-
-## 8. Build Time
+## 7. Build Time
 
 - **Metric**: Average build time for deployments.
 - **Threshold**: 95% of builds should complete within 10 minutes.
 - **Target Percentage**: 95%
 - **Evaluation Period**: Per week.
 
-## 9. Toil Reduction
+## 8. Toil Reduction
 
 - **Metric**: Percentage reduction in manual intervention for operational tasks.
 - **Threshold**: Achieve a 20% reduction in manual toil.
 - **Target Percentage**: 20%
 - **Evaluation Period**: Per quarter.
 
-## 10. Incident Resolution Time
+## 9. Incident Resolution Time
 
 - **Metric**: Median time to resolve critical incidents.
 - **Threshold**: 95% of critical incidents should be resolved within 2 hours.
 - **Target Percentage**: 95%
 - **Evaluation Period**: Per month.
 
-## 11. Percentage of Untested Code
+## 10. Percentage of Untested Code
 
 - **Metric**: Percentage of code that has not been covered by automated tests.
 - **Threshold**: Keep untested code below 10% of the codebase.
 - **Target Percentage**: 90% of the codebase should be covered by tests.
 - **Evaluation Period**: Per quarter.
 
-## 12. Scalability Threshold
+## 11. Scalability Threshold
 
 - **Metric**: Number of users the system can support before experiencing degraded service.
 - **Threshold**: System should support up to 1000 concurrent users without performance degradation.
