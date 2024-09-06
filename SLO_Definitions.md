@@ -72,13 +72,6 @@ This document defines the Service Level Objectives (SLOs) for the `c397-team05-p
 - **Target Percentage**: 90% of the codebase should be covered by tests.
 - **Evaluation Period**: Per quarter.
 
-## 11. Scalability Threshold
-
-- **Metric**: Number of users the system can support before experiencing degraded service.
-- **Threshold**: System should support up to 1000 concurrent users without performance degradation.
-- **Target Percentage**: 99.9% availability at 1000 users.
-- **Evaluation Period**: Per quarter.
-
 ### Conclusion
 
 These SLOs are designed to ensure the reliability, performance, and user satisfaction of the services within the `c397-team05-prod` namespace. Regular monitoring and evaluation will help maintain and improve these metrics over time.
